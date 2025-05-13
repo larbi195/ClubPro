@@ -11,14 +11,13 @@ public abstract class Person {
     private Integer salary;
     private LocalDate birthday;
     private Gender gender;
-
-
     public Person(String lastname, String firstname, LocalDate birthday, Gender gender, Integer salary) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.birthday = birthday;
-        this.gender = gender;
         this.salary = salary;
+        this.gender = gender;
+
     }
 
 
