@@ -1,5 +1,6 @@
 package com.example.clubprojava.model;
 
+import com.example.clubprojava.model.Enum.JerseySize;
 import com.example.clubprojava.model.Enum.Position;
 import com.example.clubprojava.model.Enum.StrongFoot;
 
@@ -12,8 +13,10 @@ public class Player extends Person {
     private double weight;
     private double height;
     private StrongFoot strongFoot;
+    private JerseySize jerseySize;
 
-    public Player(String lastname, String firstname, LocalDate birthday, String gender, Integer salary, Integer jerseyNumber, Position position, double shoeSize, double weight, double height, StrongFoot strongFoot) {
+
+    public Player(String lastname, String firstname, LocalDate birthday, String gender, Integer salary, Integer jerseyNumber, Position position, double shoeSize, double weight, double height, StrongFoot strongFoot, JerseySize jerseySize) {
         super(lastname, firstname, birthday, gender, salary);
         this.jerseyNumber = jerseyNumber;
         this.position = position;
@@ -21,6 +24,7 @@ public class Player extends Person {
         this.weight = weight;
         this.height = height;
         this.strongFoot = strongFoot;
+        this.jerseySize = jerseySize;
     }
 
     public Integer getJerseyNumber() {
@@ -69,5 +73,12 @@ public class Player extends Person {
 
     public void setStrongFoot(StrongFoot strongFoot) {
         this.strongFoot = strongFoot;
+    }
+
+    public JerseySize getJerseySize() {
+        return jerseySize;
+    }
+    public void setJerseySize(JerseySize jerseySize) {
+        this.jerseySize = jerseySize;
     }
 }
