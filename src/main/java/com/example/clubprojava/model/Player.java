@@ -4,12 +4,14 @@ import com.example.clubprojava.model.Enum.Gender;
 import com.example.clubprojava.model.Enum.JerseySize;
 import com.example.clubprojava.model.Enum.Position;
 import com.example.clubprojava.model.Enum.StrongFoot;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 import java.time.LocalDate;
 
 public class Player extends Person {
     private Integer jerseyNumber;
-    private Position position;
+    private ObjectProperty<Position> position;
     private double shoeSize;
     private double weight;
     private double height;
@@ -20,7 +22,7 @@ public class Player extends Person {
     public Player(String lastname, String firstname, LocalDate birthday, Gender gender, Integer salary, Integer jerseyNumber, Position position, double shoeSize, double weight, double height, StrongFoot strongFoot, JerseySize jerseySize) {
         super(lastname, firstname, birthday, gender, salary);
         this.jerseyNumber = jerseyNumber;
-        this.position = position;
+        this.position = new SimpleObjectProperty<>(position);
         this.shoeSize = shoeSize;
         this.weight = weight;
         this.height = height;
@@ -37,11 +39,15 @@ public class Player extends Person {
     }
 
     public Position getPosition() {
+        return position.get();
+    }
+
+    public ObjectProperty<Position> positionProperty() {
         return position;
     }
 
     public void setPosition(Position position) {
-        this.position = position;
+        this.position.set(position);
     }
 
     public double getWeight() {
