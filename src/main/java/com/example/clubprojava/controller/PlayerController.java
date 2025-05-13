@@ -1,8 +1,10 @@
 package com.example.clubprojava.controller;
 
+import com.dlsc.formsfx.model.structure.IntegerField;
 import com.example.clubprojava.model.AppContext;
 import com.example.clubprojava.model.Club;
 import com.example.clubprojava.model.Enum.Gender;
+import com.example.clubprojava.model.Enum.JerseySize;
 import com.example.clubprojava.model.Enum.Position;
 import com.example.clubprojava.model.Enum.StrongFoot;
 import com.example.clubprojava.model.Player;
@@ -12,10 +14,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.stream.Collectors;
@@ -26,12 +25,9 @@ import java.util.List;
 
 public class PlayerController {
     private Club club;
-    @FXML
-    private Label titleText;
+    private ObservableList<Player> playersList;
     @FXML
     private Label clubName;
-    @FXML
-    private ListView playerListView;
     @FXML
     private TableView<Player> playerTable;
     @FXML
@@ -39,15 +35,34 @@ public class PlayerController {
     @FXML
     private TableColumn<Player, String> lastNameColumn;
     @FXML
-    private TableColumn<Player, Position> positionColumn;
+    private TableColumn<Player, Gender> genderColumn;
     @FXML
     private TableColumn<Player, Integer> ageColumn;
+    @FXML
+    private TableColumn<Player, Integer> salaryColumn;
+    @FXML
+    private TableColumn<Player, Position> positionColumn;
+    @FXML
+    private TextField firstNameTextField;
+    @FXML
+    private TextField lastNameTextField;
+    @FXML
+    private DatePicker birthdayDatePicker;
+    @FXML
+    private RadioButton menRadio;
+    @FXML
+    private RadioButton womenRadio;
+    private ToggleGroup genderGroup;
+    @FXML
+    private TextField salaryTextField;
+    @FXML
+    private ComboBox<Position> positionComboBox;
+
+    @FXML
+    private Label outputLabel;
 
     @FXML
     public void initialize() {
-        // Titre de la page
-        titleText.setText("Page des Joueurs");
-
         club = AppContext.getCurrentClub();
 
         clubName.setText(club.getName());
@@ -55,15 +70,58 @@ public class PlayerController {
         // Configure les colonnes (doit correspondre aux noms des getters)
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstnameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastnameProperty());
+        genderColumn.setCellValueFactory(cellData -> cellData.getValue().genderProperty());
+        salaryColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getSalary()).asObject());
         positionColumn.setCellValueFactory(cellData -> cellData.getValue().positionProperty());
         ageColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAge()).asObject());
 
         // Exemple de données
-        ObservableList<Player> players = FXCollections.observableArrayList(club.getPlayers());
+        playersList = FXCollections.observableArrayList(club.getPlayers());
 
         System.out.println(club.getPlayers());
 
-        playerTable.setItems(players);
+        playerTable.setItems(playersList);
+
+        positionComboBox.getItems().addAll(Position.values());
+
+        genderGroup = new ToggleGroup();
+        menRadio.setToggleGroup(genderGroup);
+        womenRadio.setToggleGroup(genderGroup);
+
+        menRadio.setUserData(Gender.MEN);
+        womenRadio.setUserData(Gender.WOMAN);
+    }
+
+    @FXML
+    private void handleSubmit() {
+        int salary = 0;
+        try {
+            salary = Integer.parseInt(salaryTextField.getText());
+        } catch (NumberFormatException e) {
+            outputLabel.setText("Veuillez entrer un salaire valide.");
+            return;
+        }
+        Player newPlayer = new Player(
+            lastNameTextField.getText(),
+            firstNameTextField.getText(),
+            birthdayDatePicker.getValue(),
+            (Gender) genderGroup.getSelectedToggle().getUserData(),
+            salary,
+            10,
+            positionComboBox.getValue(),
+            45,
+            65,
+            1.93,
+            StrongFoot.RIGHT,
+            JerseySize.L
+        );
+
+        club.addPlayer(newPlayer);
+        playersList.add(newPlayer);
+
+        // Vider les champs
+        firstNameTextField.setText("");
+        lastNameTextField.setText("");
     }
 
 }

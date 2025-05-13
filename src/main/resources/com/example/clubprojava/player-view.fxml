@@ -8,20 +8,46 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import com.sun.javafx.scene.control.IntegerField?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.clubprojava.controller.PlayerController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="titleText"/>
+    <Label text="Page des Joueurs"/>
     <Label fx:id="clubName"/>
+    <VBox>
+        <Label text="Prénom"/>
+        <TextField fx:id="firstNameTextField"/>
+        <Label text="Nom"/>
+        <TextField fx:id="lastNameTextField"/>
+        <Label text="Date de naissance"/>
+        <DatePicker fx:id="birthdayDatePicker"/>
+        <Label text="Genre :" layoutX="50" layoutY="50"/>
+        <RadioButton fx:id="menRadio" text="Homme" layoutX="120" layoutY="50"/>
+        <RadioButton fx:id="womenRadio" text="Femme" layoutX="200" layoutY="50"/>
+        <Label text="Salaire"/>
+        <TextField fx:id="salaryTextField"/>
+        <Label text="Poste"/>
+        <ComboBox fx:id="positionComboBox" layoutX="50" layoutY="100" prefWidth="200"/>
+
+
+        <Button text="Ajouter" onAction="#handleSubmit"/>
+    </VBox>
     <TableView fx:id="playerTable" layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0">
         <columns>
             <TableColumn fx:id="firstNameColumn" text="Prénom" prefWidth="100.0"/>
             <TableColumn fx:id="lastNameColumn" text="Nom" prefWidth="100.0"/>
-            <TableColumn fx:id="positionColumn" text="Poste" prefWidth="100.0"/>
             <TableColumn fx:id="ageColumn" text="Âge" prefWidth="100.0"/>
+            <TableColumn fx:id="genderColumn" text="Genre" prefWidth="100.0"/>
+            <TableColumn fx:id="salaryColumn" text="Salaire" prefWidth="100.0"/>
+            <TableColumn fx:id="positionColumn" text="Poste" prefWidth="100.0"/>
+
         </columns>
     </TableView>
 

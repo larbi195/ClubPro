@@ -12,6 +12,7 @@ public abstract class Person {
     private IntegerProperty salary;
     private ObjectProperty<LocalDate> birthday;
     private ObjectProperty<Gender> gender;
+
     public Person(String lastname, String firstname, LocalDate birthday, Gender gender, Integer salary) {
         this.lastname = new SimpleStringProperty(lastname);
         this.firstname = new SimpleStringProperty(firstname);
@@ -20,7 +21,6 @@ public abstract class Person {
         this.gender = new SimpleObjectProperty<>(gender);
 
     }
-
 
     public LocalDate getBirthday() {
         return birthday.get();
