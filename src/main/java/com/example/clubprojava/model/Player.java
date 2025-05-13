@@ -1,5 +1,8 @@
 package com.example.clubprojava.model;
 
+import com.example.clubprojava.model.Enum.Position;
+import com.example.clubprojava.model.Enum.StrongFoot;
+
 import java.time.LocalDate;
 
 public class Player extends Person {
