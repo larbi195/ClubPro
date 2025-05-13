@@ -1,4 +1,4 @@
-package com.example.clubprojava;
+package com.example.clubprojava.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

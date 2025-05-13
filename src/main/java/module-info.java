@@ -8,4 +8,6 @@ module com.example.clubprojava {
 
     opens com.example.clubprojava to javafx.fxml;
     exports com.example.clubprojava;
+    exports com.example.clubprojava.controller;
+    opens com.example.clubprojava.controller to javafx.fxml;
 }
