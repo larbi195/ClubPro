@@ -1,5 +1,7 @@
 package com.example.clubprojava.model;
 
+import com.example.clubprojava.model.Enum.Gender;
+
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -8,15 +10,19 @@ public abstract class Person {
     private String lastname;
     private Integer salary;
     private LocalDate birthday;
-    private String gender;
 
 
-    public Person(String lastname, String firstname, LocalDate birthday, String gender, Integer salary) {
+
+    private Gender gender;
+
+
+    public Person(String lastname, String firstname, LocalDate birthday, Gender gender, Integer salary) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.birthday = birthday;
-        this.gender = gender;
         this.salary = salary;
+        this.gender = gender;
+
     }
 
 
@@ -32,7 +38,7 @@ public abstract class Person {
     public String getLastname() {
         return lastname;
     }
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
