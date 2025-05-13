@@ -19,9 +19,6 @@
     </padding>
 
     <TabPane VBox.vgrow="ALWAYS">
-        <Tab text="Liste">
-            <ListView fx:id="membersListView" VBox.vgrow="ALWAYS"/>
-        </Tab>
         <Tab text="Tableau">
             <TableView fx:id="membersTableView" VBox.vgrow="ALWAYS"/>
         </Tab>

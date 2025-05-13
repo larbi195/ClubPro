@@ -21,8 +21,6 @@ import java.util.ResourceBundle;
 
 public class ClubMemberController implements Initializable {
 
-    @FXML
-    private ListView<Affichable> membersListView;
 
     @FXML
     private TableView<Affichable> membersTableView;
@@ -39,15 +37,7 @@ public class ClubMemberController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         membersList = FXCollections.observableArrayList();
 
-        // Configuration de la ListView
-        membersListView.setItems(membersList);
-        membersListView.setCellFactory(param -> new javafx.scene.control.ListCell<>() {
-            @Override
-            protected void updateItem(Affichable item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty ? null : item.getTexteAffichage());
-            }
-        });
+
 
         // Configuration de la TableView
         TableColumn<Affichable, String> infoColumn = new TableColumn<>("Information");
