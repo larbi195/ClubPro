@@ -1,2 +1,6 @@
-package com.example.clubprojava.model.Enum;public enum Gender {
+package com.example.clubprojava.model.Enum;
+
+public enum Gender {
+    MEN,
+    WOMEN
 }
