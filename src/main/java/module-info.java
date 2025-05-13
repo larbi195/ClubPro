@@ -10,4 +10,9 @@ module com.example.clubprojava {
     exports com.example.clubprojava;
     exports com.example.clubprojava.controller;
     opens com.example.clubprojava.controller to javafx.fxml;
+    opens com.example.clubprojava.model to javafx.base;
+
+    exports com.example.clubprojava.model;
+    exports com.example.clubprojava.model.Enum;
+
 }
