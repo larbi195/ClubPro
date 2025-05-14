@@ -1,10 +1,7 @@
 
 package com.example.clubprojava.controller;
 
-import com.example.clubprojava.model.Affichable;
-import com.example.clubprojava.model.Club;
-import com.example.clubprojava.model.Player;
-import com.example.clubprojava.model.Staff;
+import com.example.clubprojava.model.*;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -44,6 +41,7 @@ public class ClubMemberController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.club = AppContext.getCurrentClub();
         membersList = FXCollections.observableArrayList();
 
         // Colonne cachée pour respecter la story
@@ -164,6 +162,7 @@ public class ClubMemberController implements Initializable {
         );
 
         membersTableView.setItems(membersList);
+        loadMembers();
     }
     private void loadMembers() {
         if (club != null) {
