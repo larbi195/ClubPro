@@ -1,7 +1,9 @@
 
 package com.example.clubprojava;
 
+
 import com.example.clubprojava.controller.ClubMemberController;
+
 import com.example.clubprojava.model.*;
 import com.example.clubprojava.model.Enum.*;
 import javafx.application.Application;
@@ -12,6 +14,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import java.util.List;
 
 public class HelloApplication extends Application {
@@ -53,6 +57,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Membres du Club");
         stage.setScene(scene);
         stage.show();
+
 
 
     }
