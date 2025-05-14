@@ -1,53 +1,71 @@
 package com.example.clubprojava.model;
 
 import com.example.clubprojava.model.Enum.Gender;
+import javafx.beans.property.*;
 
 import java.time.LocalDate;
 import java.time.Period;
 
 public abstract class Person {
-    private String firstname;
-    private String lastname;
-    private Integer salary;
-    private LocalDate birthday;
-    private Gender gender;
+    private StringProperty firstname;
+    private StringProperty lastname;
+    private IntegerProperty salary;
+    private ObjectProperty<LocalDate> birthday;
+    private ObjectProperty<Gender> gender;
+
     public Person(String lastname, String firstname, LocalDate birthday, Gender gender, Integer salary) {
-        this.lastname = lastname;
-        this.firstname = firstname;
-        this.birthday = birthday;
-        this.salary = salary;
-        this.gender = gender;
+        this.lastname = new SimpleStringProperty(lastname);
+        this.firstname = new SimpleStringProperty(firstname);
+        this.birthday = new SimpleObjectProperty<>(birthday);
+        this.salary = new SimpleIntegerProperty(salary);
+        this.gender = new SimpleObjectProperty<>(gender);
 
     }
 
+    public Person() {
+
+    }
 
     public LocalDate getBirthday() {
+        return birthday.get();
+    }
+
+    public ObjectProperty<LocalDate> birthdayProperty() {
         return birthday;
     }
 
-
     public String getFirstname() {
-        return firstname;
+        return firstname.get();
     }
 
     public String getLastname() {
-        return lastname;
+        return lastname.get();
     }
+
+    public StringProperty firstnameProperty() {return firstname;}
+    public StringProperty lastnameProperty() {return lastname;}
     public Gender getGender() {
+        return gender.get();
+    }
+    public ObjectProperty<Gender> genderProperty() {
         return gender;
     }
 
     public Integer getSalary() {
+        return salary.get();
+    }
+
+    public IntegerProperty salaryProperty() {
         return salary;
     }
 
     public void setSalary(Integer salary) {
-        this.salary = salary;
+        this.salary.set(salary);
     }
 
     public int getAge() {
-        LocalDate aujourdHui = LocalDate.now();
-        return Period.between(this.birthday, aujourdHui).getYears();
+        LocalDate today = LocalDate.now();
+        return Period.between(this.birthday.get(), today).getYears();
     }
 
 }

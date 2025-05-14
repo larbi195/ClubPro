@@ -1,6 +1,10 @@
 package com.example.clubprojava.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Statistique {
+
     private Integer matchesWon;
     private Integer matchesLost;
     private Integer matchesPlayed;
@@ -10,7 +14,22 @@ public class Statistique {
     private Integer goalsScored;
     private Integer goalsConceded;
 
-    public Statistique(Integer matchesWon, Integer matchesLost, Integer matchesPlayed, Integer yellowCards, Integer matchesNull, Integer redCards, Integer goalsScored, Integer goalsConceded) {
+    // ✅ Constructeur vide pour Jackson
+    public Statistique() {
+    }
+
+    // ✅ Constructeur complet avec @JsonCreator (optionnel mais propre)
+    @JsonCreator
+    public Statistique(
+            @JsonProperty("matchesWon") Integer matchesWon,
+            @JsonProperty("matchesLost") Integer matchesLost,
+            @JsonProperty("matchesPlayed") Integer matchesPlayed,
+            @JsonProperty("yellowCards") Integer yellowCards,
+            @JsonProperty("matchesNull") Integer matchesNull,
+            @JsonProperty("redCards") Integer redCards,
+            @JsonProperty("goalsScored") Integer goalsScored,
+            @JsonProperty("goalsConceded") Integer goalsConceded
+    ) {
         this.matchesWon = matchesWon;
         this.matchesLost = matchesLost;
         this.matchesPlayed = matchesPlayed;
@@ -20,6 +39,8 @@ public class Statistique {
         this.goalsScored = goalsScored;
         this.goalsConceded = goalsConceded;
     }
+
+    // Getters & Setters...
 
     public Integer getMatchesWon() {
         return matchesWon;
