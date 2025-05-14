@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.clubprojava.controller.MatchController"
+      spacing="10" alignment="CENTER">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label fx:id="clubNameLabel" style="-fx-font-size: 18px;"/>
+
+    <TableView fx:id="matchTable" prefWidth="600">
+        <columns>
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="150"/>
+            <TableColumn fx:id="opponentColumn" text="Adversaire" prefWidth="150"/>
+            <TableColumn fx:id="stadiumColumn" text="Stade" prefWidth="150"/>
+            <TableColumn fx:id="capacityColumn" text="Capacité" prefWidth="150"/>
+            <TableColumn fx:id="resultColumn" text="Result" prefWidth="150"/>
+            <TableColumn fx:id="yellowColumn" text="Yellow" prefWidth="150"/>
+            <TableColumn fx:id="redColumn" text="Red" prefWidth="150"/>
+            <TableColumn fx:id="scoredColumn" text="Scorded" prefWidth="150"/>
+            <TableColumn fx:id="concededColumn" text="Conceded" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+</VBox>

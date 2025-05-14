@@ -30,23 +30,45 @@ public class HelloApplication extends Application {
                 new Staff("Plus", "Dinspi", LocalDate.parse("2001-07-22"), Gender.WOMAN, 950, Job.TEAM_DOCTOR)
         );
 
+        List<Jersey> jerseysList = new ArrayList<>(Arrays.asList(
+                new Jersey(TypeJersey.HOME, ColorJersey.RED, ColorJersey.BLUE),
+                new Jersey(TypeJersey.AWAY, ColorJersey.BLACK, ColorJersey.WHITE)
+        ));
+
+        List<Stadium> stadiumsList = new ArrayList<>(Arrays.asList(
+                new Stadium("Camp Nou", 99000, "Barcelone", GrassType.NATURAL, 10500.0),
+                new Stadium("parc", 55000, "Paris", GrassType.SYNTHETIC, 10500.0),
+                new Stadium("it", 63000, "Milan", GrassType.HYBRID, 10500.0)
+        ));
+
         Club club = new Club(
-                "FC Genzo",
+                "FC Mahr",
                 "Sartrouville",
                 1000000,
                 "Liga",
                 1,
                 playersList,
                 staffsList,
+                stadiumsList,
                 new ArrayList<Match>(),
-                new ArrayList<Jersey>(),
+                jerseysList,
                 new Statistique(0, 0, 0, 0, 0, 0, 0, 0)
         );
+
+        Team team1 = new Team(playersList);
+
+        List<Match> Matchlist = Arrays.asList(
+                new Match(LocalDate.now(), "BARCA", TypeMatch.AWAY, club.getJerseys().get(0), Championship.UEFA_CHAMPIONS_LEAGUE, team1, club.getStadiums().get(0), MatchResult.DEFEAT, 0,0,0,2,3),
+                new Match(LocalDate.now(), "PSG", TypeMatch.HOME, club.getJerseys().get(0), Championship.LIGUE_1, team1, club.getStadiums().get(1), MatchResult.DEFEAT, 0,0,0,2,3),
+                new Match(LocalDate.now(), "INTER", TypeMatch.AWAY, club.getJerseys().get(0), Championship.UEFA_EUROPA_LEAGUE, team1, club.getStadiums().get(2), MatchResult.DEFEAT, 0,0,0,2,3)
+
+        );
+        club.setMatches(Matchlist);
 
         AppContext.setCurrentClub(club);
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("player-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("match-view.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load(), 1200, 600);
         stage.setTitle("ClubPro");
