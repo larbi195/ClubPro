@@ -9,6 +9,7 @@ import com.example.clubprojava.model.Enum.Position;
 import com.example.clubprojava.model.Enum.StrongFoot;
 import com.example.clubprojava.model.Player;
 import javafx.application.Application;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -43,6 +44,18 @@ public class PlayerController {
     @FXML
     private TableColumn<Player, Position> positionColumn;
     @FXML
+    private TableColumn<Player, Integer> jerseyNumberColumn;
+    @FXML
+    private TableColumn<Player, JerseySize> jerseySizeColumn;
+    @FXML
+    private TableColumn<Player, Double> shoeSizeColumn;
+    @FXML
+    private TableColumn<Player, Double> weightColumn;
+    @FXML
+    private TableColumn<Player, Double> heightColumn;
+    @FXML
+    private TableColumn<Player, StrongFoot> strongFootColumn;
+    @FXML
     private TextField firstNameTextField;
     @FXML
     private TextField lastNameTextField;
@@ -71,9 +84,15 @@ public class PlayerController {
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstnameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastnameProperty());
         genderColumn.setCellValueFactory(cellData -> cellData.getValue().genderProperty());
-        salaryColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getSalary()).asObject());
-        positionColumn.setCellValueFactory(cellData -> cellData.getValue().positionProperty());
         ageColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAge()).asObject());
+        salaryColumn.setCellValueFactory(cellData -> cellData.getValue().salaryProperty().asObject());
+        positionColumn.setCellValueFactory(cellData -> cellData.getValue().positionProperty());
+        jerseyNumberColumn.setCellValueFactory(cellData -> cellData.getValue().jerseyNumberProperty().asObject());
+        jerseySizeColumn.setCellValueFactory(cellData -> cellData.getValue().jerseySizeProperty());
+        shoeSizeColumn.setCellValueFactory(cellData -> cellData.getValue().shoeSizeProperty().asObject());
+        weightColumn.setCellValueFactory(cellData -> cellData.getValue().weightProperty().asObject());
+        heightColumn.setCellValueFactory(cellData -> cellData.getValue().heightProperty().asObject());
+        strongFootColumn.setCellValueFactory(cellData -> cellData.getValue().strongFootProperty());
 
         // Exemple de données
         playersList = FXCollections.observableArrayList(club.getPlayers());

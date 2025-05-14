@@ -43,11 +43,16 @@
         <columns>
             <TableColumn fx:id="firstNameColumn" text="Prénom" prefWidth="100.0"/>
             <TableColumn fx:id="lastNameColumn" text="Nom" prefWidth="100.0"/>
-            <TableColumn fx:id="ageColumn" text="Âge" prefWidth="100.0"/>
+            <TableColumn fx:id="ageColumn" text="Âge" prefWidth="50.0"/>
             <TableColumn fx:id="genderColumn" text="Genre" prefWidth="100.0"/>
             <TableColumn fx:id="salaryColumn" text="Salaire" prefWidth="100.0"/>
             <TableColumn fx:id="positionColumn" text="Poste" prefWidth="100.0"/>
-
+            <TableColumn fx:id="jerseyNumberColumn" text="Numéro" prefWidth="100.0"/>
+            <TableColumn fx:id="jerseySizeColumn" text="Taille du maillot" prefWidth="100.0"/>
+            <TableColumn fx:id="shoeSizeColumn" text="Pointure" prefWidth="100.0"/>
+            <TableColumn fx:id="weightColumn" text="Poid" prefWidth="100.0"/>
+            <TableColumn fx:id="heightColumn" text="Taille" prefWidth="100.0"/>
+            <TableColumn fx:id="strongFootColumn" text="Pied fort" prefWidth="100.0"/>
         </columns>
     </TableView>
 
