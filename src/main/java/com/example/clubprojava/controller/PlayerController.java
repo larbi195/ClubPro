@@ -93,13 +93,13 @@ public class PlayerController {
 
 
     @FXML
-    private Label outputLabel;
+        private Label outputLabel;
 
-    @FXML
-    public void initialize() {
-        club = AppContext.getCurrentClub();
+        @FXML
+        public void initialize() {
+            club = AppContext.getCurrentClub();
 
-        clubName.setText(club.getName());
+            clubName.setText(club.getName());
 
         // Configure les colonnes (doit correspondre aux noms des getters)
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstnameProperty());
@@ -115,7 +115,7 @@ public class PlayerController {
         heightColumn.setCellValueFactory(cellData -> cellData.getValue().heightProperty().asObject());
         strongFootColumn.setCellValueFactory(cellData -> cellData.getValue().strongFootProperty());
 
-        // Exemple de données
+        // Récupérer la liste des joueurs et la convertir en ObservableArrayList
         playersList = FXCollections.observableArrayList(club.getPlayers());
 
         // Attribuer la listes des joueurs dans le tableau
@@ -152,7 +152,7 @@ public class PlayerController {
             String firstName = firstNameTextField.getText();
             String lastName = lastNameTextField.getText();
             LocalDate birthday = birthdayDatePicker.getValue();
-            Gender gender = menRadio.isSelected() ? Gender.MEN : Gender.WOMAN;
+            Gender gender = (Gender) genderGroup.getSelectedToggle().getUserData();
             int salary = Integer.parseInt(salaryTextField.getText());
             Position position = positionComboBox.getValue();
             int jerseyNumber = Integer.parseInt(jerseyNumberTextField.getText());

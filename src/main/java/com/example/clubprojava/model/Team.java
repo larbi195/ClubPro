@@ -8,6 +8,8 @@ public class Team{
         this.playerlist = playerlist;
     }
 
+    public Team() {
+    }
     public List<Player> getPlayerlist() {
         return playerlist;
     }

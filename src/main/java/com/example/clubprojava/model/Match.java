@@ -37,6 +37,7 @@ public class Match {
         this.goalConceded = goalConceded;
 
     }
+    public Match() {}
 
     public LocalDate getDate() {
         return date;
