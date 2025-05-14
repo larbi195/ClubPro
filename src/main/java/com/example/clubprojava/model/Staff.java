@@ -5,9 +5,8 @@ import com.example.clubprojava.model.Enum.Job;
 
 import java.time.LocalDate;
 
-public class Staff extends Person {
+public class Staff extends Person implements Affichable {
     private Job job;
-
 
     public Staff(String lastname, String firstname, LocalDate birthday, Gender gender, Integer salary, Job job) {
         super(lastname, firstname, birthday, gender, salary);
@@ -17,8 +16,19 @@ public class Staff extends Person {
     public Job getJob() {
         return job;
     }
+
     public void setJob(Job job) {
         this.job = job;
+    }
+
+    @Override
+    public String getTexteAffichage() {
+        return String.format("Staff: %s %s | Poste: %s | Salaire: %d€",
+                getFirstname(),
+                getLastname(),
+                job,
+                getSalary()
+        );
     }
 
 }

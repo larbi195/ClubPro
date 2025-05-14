@@ -7,7 +7,7 @@ import com.example.clubprojava.model.Enum.StrongFoot;
 
 import java.time.LocalDate;
 
-public class Player extends Person {
+public class Player extends Person implements Affichable {
     private Integer jerseyNumber;
     private Position position;
     private double shoeSize;
@@ -82,4 +82,20 @@ public class Player extends Person {
     public void setJerseySize(JerseySize jerseySize) {
         this.jerseySize = jerseySize;
     }
-}
+    @Override
+    public String getTexteAffichage() {
+        return String.format("Joueur: %s %s | N°%d | Position: %s | Taille: %.1f cm | Poids: %.1f kg | Pointure: %.1f | Pied fort: %s | Taille maillot: %s | Salaire: %d€",
+                getFirstname(),
+                getLastname(),
+                getJerseyNumber(),
+                getPosition(),
+                getHeight(),
+                getWeight(),
+                getShoeSize(),
+                getStrongFoot(),
+                getJerseySize(),
+                getSalary()
+        );
+
+
+    }}
