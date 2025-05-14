@@ -4,6 +4,7 @@ package com.example.clubprojava.controller;
 import com.example.clubprojava.model.Affichable;
 import com.example.clubprojava.model.Club;
 import com.example.clubprojava.model.Player;
+import com.example.clubprojava.model.Staff;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -45,32 +46,50 @@ public class ClubMemberController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         membersList = FXCollections.observableArrayList();
 
-        // Colonnes communes
-        TableColumn<Affichable, String> roleColumn = new TableColumn<>("Rôle");
-        TableColumn<Affichable, String> nomColumn = new TableColumn<>("Nom");
+        // Colonne cachée pour respecter la story
+        TableColumn<Affichable, String> texteAffichageColumn = new TableColumn<>("Texte d'affichage");
+        texteAffichageColumn.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getTexteAffichage())
+        );
+        texteAffichageColumn.setVisible(false);
+
+        // Colonnes pour toutes les données
+        TableColumn<Affichable, String> typeColumn = new TableColumn<>("Type");
+        typeColumn.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue() instanceof Player ? "Joueur" : "Staff")
+        );
+
         TableColumn<Affichable, String> prenomColumn = new TableColumn<>("Prénom");
-        TableColumn<Affichable, Integer> salaireColumn = new TableColumn<>("Salaire");
-        TableColumn<Affichable, String> genreColumn = new TableColumn<>("Genre");
-        TableColumn<Affichable, String> naissanceColumn = new TableColumn<>("Date de naissance");
+        prenomColumn.setCellValueFactory(data -> {
+            if (data.getValue() instanceof Player) {
+                return new SimpleStringProperty(((Player) data.getValue()).getFirstname());
+            } else if (data.getValue() instanceof Staff) {
+                return new SimpleStringProperty(((Staff) data.getValue()).getFirstname());
+            }
+            return new SimpleStringProperty("");
+        });
 
-        // Colonnes spécifiques aux joueurs
+        TableColumn<Affichable, String> nomColumn = new TableColumn<>("Nom");
+        nomColumn.setCellValueFactory(data -> {
+            if (data.getValue() instanceof Player) {
+                return new SimpleStringProperty(((Player) data.getValue()).getLastname());
+            } else if (data.getValue() instanceof Staff) {
+                return new SimpleStringProperty(((Staff) data.getValue()).getLastname());
+            }
+            return new SimpleStringProperty("");
+        });
+
+        TableColumn<Affichable, String> posteColumn = new TableColumn<>("Poste/Position");
+        posteColumn.setCellValueFactory(data -> {
+            if (data.getValue() instanceof Player) {
+                return new SimpleStringProperty(((Player) data.getValue()).getPosition().toString());
+            } else if (data.getValue() instanceof Staff) {
+                return new SimpleStringProperty(((Staff) data.getValue()).getJob().toString());
+            }
+            return new SimpleStringProperty("");
+        });
+
         TableColumn<Affichable, Integer> numeroColumn = new TableColumn<>("Numéro");
-        TableColumn<Affichable, String> positionColumn = new TableColumn<>("Position");
-        TableColumn<Affichable, Double> poidsColumn = new TableColumn<>("Poids");
-        TableColumn<Affichable, Double> tailleColumn = new TableColumn<>("Taille");
-        TableColumn<Affichable, Double> pointureColumn = new TableColumn<>("Pointure");
-        TableColumn<Affichable, String> piedFortColumn = new TableColumn<>("Pied fort");
-        TableColumn<Affichable, String> tailleMaillotColumn = new TableColumn<>("Taille maillot");
-
-        // Configuration des cellValueFactory pour les colonnes communes
-        roleColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getRole()));
-        nomColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getLastname()));
-        prenomColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFirstname()));
-        salaireColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getSalary()));
-        genreColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getGender().toString()));
-        naissanceColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getBirthday().toString()));
-
-        // Configuration des cellValueFactory pour les colonnes spécifiques aux joueurs
         numeroColumn.setCellValueFactory(data -> {
             if (data.getValue() instanceof Player) {
                 return new SimpleObjectProperty<>(((Player) data.getValue()).getJerseyNumber());
@@ -78,20 +97,7 @@ public class ClubMemberController implements Initializable {
             return new SimpleObjectProperty<>(null);
         });
 
-        positionColumn.setCellValueFactory(data -> {
-            if (data.getValue() instanceof Player) {
-                return new SimpleStringProperty(((Player) data.getValue()).getPosition().toString());
-            }
-            return new SimpleStringProperty("");
-        });
-
-        poidsColumn.setCellValueFactory(data -> {
-            if (data.getValue() instanceof Player) {
-                return new SimpleObjectProperty<>(((Player) data.getValue()).getWeight());
-            }
-            return new SimpleObjectProperty<>(null);
-        });
-
+        TableColumn<Affichable, Double> tailleColumn = new TableColumn<>("Taille (cm)");
         tailleColumn.setCellValueFactory(data -> {
             if (data.getValue() instanceof Player) {
                 return new SimpleObjectProperty<>(((Player) data.getValue()).getHeight());
@@ -99,6 +105,15 @@ public class ClubMemberController implements Initializable {
             return new SimpleObjectProperty<>(null);
         });
 
+        TableColumn<Affichable, Double> poidsColumn = new TableColumn<>("Poids (kg)");
+        poidsColumn.setCellValueFactory(data -> {
+            if (data.getValue() instanceof Player) {
+                return new SimpleObjectProperty<>(((Player) data.getValue()).getWeight());
+            }
+            return new SimpleObjectProperty<>(null);
+        });
+
+        TableColumn<Affichable, Double> pointureColumn = new TableColumn<>("Pointure");
         pointureColumn.setCellValueFactory(data -> {
             if (data.getValue() instanceof Player) {
                 return new SimpleObjectProperty<>(((Player) data.getValue()).getShoeSize());
@@ -106,6 +121,7 @@ public class ClubMemberController implements Initializable {
             return new SimpleObjectProperty<>(null);
         });
 
+        TableColumn<Affichable, String> piedFortColumn = new TableColumn<>("Pied Fort");
         piedFortColumn.setCellValueFactory(data -> {
             if (data.getValue() instanceof Player) {
                 return new SimpleStringProperty(((Player) data.getValue()).getStrongFoot().toString());
@@ -113,6 +129,7 @@ public class ClubMemberController implements Initializable {
             return new SimpleStringProperty("");
         });
 
+        TableColumn<Affichable, String> tailleMaillotColumn = new TableColumn<>("Taille Maillot");
         tailleMaillotColumn.setCellValueFactory(data -> {
             if (data.getValue() instanceof Player) {
                 return new SimpleStringProperty(((Player) data.getValue()).getJerseySize().toString());
@@ -120,21 +137,30 @@ public class ClubMemberController implements Initializable {
             return new SimpleStringProperty("");
         });
 
+        TableColumn<Affichable, Integer> salaireColumn = new TableColumn<>("Salaire (€)");
+        salaireColumn.setCellValueFactory(data -> {
+            if (data.getValue() instanceof Player) {
+                return new SimpleObjectProperty<>(((Player) data.getValue()).getSalary());
+            } else if (data.getValue() instanceof Staff) {
+                return new SimpleObjectProperty<>(((Staff) data.getValue()).getSalary());
+            }
+            return new SimpleObjectProperty<>(null);
+        });
+
         // Ajout des colonnes à la TableView
         membersTableView.getColumns().addAll(
-                roleColumn,
-                nomColumn,
+                texteAffichageColumn,
+                typeColumn,
                 prenomColumn,
-                salaireColumn,
-                genreColumn,
-                naissanceColumn,
+                nomColumn,
+                posteColumn,
                 numeroColumn,
-                positionColumn,
-                poidsColumn,
                 tailleColumn,
+                poidsColumn,
                 pointureColumn,
                 piedFortColumn,
-                tailleMaillotColumn
+                tailleMaillotColumn,
+                salaireColumn
         );
 
         membersTableView.setItems(membersList);

@@ -21,13 +21,13 @@ public class Staff extends Person implements Affichable {
         this.job = job;
     }
     @Override
-    public String getRole() {
-        return "Staff";
-    }
-
-    @Override
-    public String getSpecificInfo() {
-        return job.toString();
+    public String getTexteAffichage() {
+        return String.format("Staff: %s %s | Poste: %s | Salaire: %d€",
+                getFirstname(),
+                getLastname(),
+                job,
+                getSalary()
+        );
     }
 
 }
