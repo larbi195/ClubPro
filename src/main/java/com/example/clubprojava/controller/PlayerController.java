@@ -1,6 +1,7 @@
 package com.example.clubprojava.controller;
 
 import com.dlsc.formsfx.model.structure.IntegerField;
+import com.example.clubprojava.DataManager;
 import com.example.clubprojava.model.AppContext;
 import com.example.clubprojava.model.Club;
 import com.example.clubprojava.model.Enum.Gender;
@@ -147,50 +148,42 @@ public class PlayerController {
 
     @FXML
     private void handleSubmit() {
-        int salary = 0;
-        int jerseyNumber = 0;
-        double shoeSize = 0.0;
-        double weight = 0.0;
-        double height = 0.0;
-
         try {
-            salary = Integer.parseInt(salaryTextField.getText().trim());
-            jerseyNumber = Integer.parseInt(jerseyNumberTextField.getText().trim());
+            String firstName = firstNameTextField.getText();
+            String lastName = lastNameTextField.getText();
+            LocalDate birthday = birthdayDatePicker.getValue();
+            Gender gender = menRadio.isSelected() ? Gender.MEN : Gender.WOMAN;
+            int salary = Integer.parseInt(salaryTextField.getText());
+            Position position = positionComboBox.getValue();
+            int jerseyNumber = Integer.parseInt(jerseyNumberTextField.getText());
+            double shoeSize = Double.parseDouble(shoeSizeTextField.getText());
+            double weight = Double.parseDouble(weightTextField.getText());
+            double height = Double.parseDouble(heightTextField.getText());
+            StrongFoot strongFoot = strongFootComboBox.getValue();
 
-            // Remplacer la virgule par un point avant de parser
-            String shoeSizeInput = shoeSizeTextField.getText().trim().replace(',', '.');
-            String weightInput = weightTextField.getText().trim().replace(',', '.');
-            String heightInput = heightTextField.getText().trim().replace(',', '.');
+            JerseySize jerseySize = sizeSRadio.isSelected() ? JerseySize.S :
+                    sizeMRadio.isSelected() ? JerseySize.M :
+                            sizeLRadio.isSelected() ? JerseySize.L : JerseySize.XL;
 
-            shoeSize = Double.parseDouble(shoeSizeInput);
-            weight = Double.parseDouble(weightInput);
-            height = Double.parseDouble(heightInput);
+            Player newPlayer = new Player(lastName, firstName, birthday, gender, salary, jerseyNumber, position,
+                    shoeSize, weight, height, strongFoot, jerseySize);
 
-        } catch (NumberFormatException e) {
-            outputLabel.setText("Veuillez entrer des valeurs numériques valides (ex: 1.75 ou 1,75).");
-            return;
+            // Ajout dans le club et la table
+            club.getPlayers().add(newPlayer);
+            playersList.add(newPlayer);  // Met à jour la vue
+
+            // Sauvegarde des données
+            AppContext.getDataManager().saveData();
+            // Sauvegarde des données
+            AppContext.getDataManager().saveData();
+            System.out.println("Joueurs sauvegardés : " + club.getPlayers().size());
+
+            outputLabel.setText("Joueur ajouté avec succès !");
+        } catch (Exception e) {
+            outputLabel.setText("Erreur : " + e.getMessage());
+            e.printStackTrace();
         }
-        Player newPlayer = new Player(
-            lastNameTextField.getText(),
-            firstNameTextField.getText(),
-            birthdayDatePicker.getValue(),
-            (Gender) genderGroup.getSelectedToggle().getUserData(),
-            salary,
-            jerseyNumber,
-            positionComboBox.getValue(),
-            shoeSize,
-            weight,
-            height,
-            strongFootComboBox.getValue(),
-            (JerseySize) jerseySizeGroup.getSelectedToggle().getUserData()
-        );
-
-        club.addPlayer(newPlayer);
-        playersList.add(newPlayer);
-
-        // Vider les champs
-        //firstNameTextField.setText("");
-        //lastNameTextField.setText("");
     }
+
 
 }

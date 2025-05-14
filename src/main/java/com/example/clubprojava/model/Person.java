@@ -22,6 +22,10 @@ public abstract class Person {
 
     }
 
+    public Person() {
+
+    }
+
     public LocalDate getBirthday() {
         return birthday.get();
     }

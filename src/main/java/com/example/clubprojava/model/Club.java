@@ -2,6 +2,7 @@ package com.example.clubprojava.model;
 
 import com.example.clubprojava.model.Enum.Job;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Club {
@@ -31,6 +32,15 @@ public class Club {
         this.jerseys = jerseys;
         this.statistique = statistique;
     }
+
+    public Club() {
+        this.players = new ArrayList<>();
+        this.staffs = new ArrayList<>();
+        this.stadiums = new ArrayList<>();
+        this.jerseys = new ArrayList<>();
+        this.matches = new ArrayList<>();
+    }
+
 
     public String getName() {
         return name;
