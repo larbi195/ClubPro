@@ -28,6 +28,12 @@ public class NavController {
         loadContent("match-view.fxml");
     }
 
+    @FXML
+    public void goToJersey() {
+        loadContent("jersey-view.fxml");
+    }
+
+
     private void loadContent(String fxmlFile) {
         try {
             var resource = getClass().getResource("/com/example/clubprojava/" + fxmlFile);

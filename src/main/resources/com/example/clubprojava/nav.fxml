@@ -16,6 +16,8 @@
                 <MenuItem text="Joueurs" onAction="#goToPlayer"/>
                 <MenuItem text="Membres du Club" onAction="#goToClubMembers"/>
                 <MenuItem text="Matchs" onAction="#goToMatch"/>
+                <MenuItem text="Maillots" onAction="#goToJersey"/>
+
             </Menu>
         </MenuBar>
     </top>
