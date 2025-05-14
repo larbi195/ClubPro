@@ -82,14 +82,14 @@ public class Player extends Person implements Affichable {
     public void setJerseySize(JerseySize jerseySize) {
         this.jerseySize = jerseySize;
     }
+    @Override
+    public String getRole() {
+        return "Player";
+    }
 
     @Override
-    public String getTexteAffichage() {
-        return String.format("%s %s - N°%d - %s",
-                getFirstname(),
-                getLastname(),
-                getJerseyNumber(),
-                getPosition());
+    public String getSpecificInfo() {
+        return String.format("N°%d - %s", jerseyNumber, position);
     }
 
 }

@@ -36,7 +36,6 @@ public class HelloApplication extends Application {
         Club club = new Club("FC Test", "Paris", 100000000.0, "Ligue 1", 1,
                 players, staffs, new ArrayList<>(), new ArrayList<>(), new Statistique(0, 0, 0, 0, 0, 0, 0, 0));
 
-        AppContext.setCurrentClub(club);
         // Charger la vue (modification de cette partie)
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("memberlist.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);

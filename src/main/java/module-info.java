@@ -5,6 +5,7 @@ module com.example.clubprojava {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
+    requires java.compiler;
 
     opens com.example.clubprojava to javafx.fxml;
     exports com.example.clubprojava;
