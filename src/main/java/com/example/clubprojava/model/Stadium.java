@@ -9,6 +9,10 @@ public class Stadium {
     private Double area;
     private GrassType grassType;
 
+    public Stadium() {
+        // Constructeur par défaut requis
+    }
+
     public Stadium(String name, Integer capacity, String address, GrassType grassType, Double area) {
         this.name = name;
         this.capacity = capacity;

@@ -1,93 +1,66 @@
 package com.example.clubprojava.controller;
 
 import com.example.clubprojava.model.*;
-import com.example.clubprojava.model.Enum.*;
-
-import javafx.beans.Observable;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.clubprojava.model.Enum.MatchResult;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
-public class MatchController implements Initializable {
+public class MatchController {
 
-    @FXML
-    private Label clubNameLabel;
-
-    @FXML
-    private TableView<Match> matchTable;
-
-    @FXML
-    private TableColumn<Match, String> dateColumn;
+    @FXML private TextField opponentField;
+    @FXML private DatePicker datePicker;
+    @FXML private TextField stadiumField;
+    @FXML private TextField capacityField;
+    @FXML private ComboBox<MatchResult> resultCombo;
+    @FXML private TextField yellowField;
+    @FXML private TextField redField;
+    @FXML private TextField scoredField;
+    @FXML private TextField concededField;
 
     @FXML
-    private TableColumn<Match, String> stadiumColumn;
-
-    @FXML
-    private TableColumn<Match, Integer> capacityColumn;
-
-    @FXML
-    private TableColumn<Match, String> opponentColumn;
-
-    @FXML
-    private TableColumn<Match, MatchResult> resultColumn;
-
-    @FXML
-    private TableColumn<Match, Integer> goalColumn;
-
-    @FXML
-    private TableColumn<Match, Integer> yellowColumn;
-
-    @FXML
-    private TableColumn<Match, Integer> redColumn ;
-
-    @FXML
-    private TableColumn<Match, Integer> scoredColumn ;
-
-    @FXML
-    private TableColumn<Match, Integer> concededColumn ;
-
-    private ObservableList<Match> matchesList;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        Club club = AppContext.getCurrentClub();
-
-        clubNameLabel.setText("Liste des matchs du " + club.getName());
-
-        opponentColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOpponent()));
-
-        dateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
-
-        stadiumColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStadium().getName()));
-
-        capacityColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getStadium().getCapacity()).asObject());
-
-        matchesList = FXCollections.observableArrayList(club.getMatches());
-
-        resultColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getMatchResult()));
-
-        yellowColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getYellowCard()).asObject());
-
-        redColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getRedCard()).asObject());
-
-        scoredColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getGoalScored()));
-
-        concededColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getGoalConceded()));
-
-        matchTable.setItems(matchesList);
+    public void initialize() {
+        resultCombo.getItems().setAll(MatchResult.values());
     }
 
+    @FXML
+    public void handleSave() {
+        try {
+            Match match = new Match(datePicker.getValue(),
+                    opponentField.getText(),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    resultCombo.getValue(),
+                    Integer.parseInt(yellowField.getText()),
+                    Integer.parseInt(redField.getText()),
+                    0, // Goal (non utilisé ?)
+                    Integer.parseInt(scoredField.getText()),
+                    Integer.parseInt(concededField.getText()));
+            match.setOpponent(opponentField.getText());
+            match.setDate(datePicker.getValue());
+
+            Stadium stadium = new Stadium();
+            stadium.setName(stadiumField.getText());
+            stadium.setCapacity(Integer.parseInt(capacityField.getText()));
+            match.setStadium(stadium);
+
+            match.setMatchResult(resultCombo.getValue());
+            match.setYellowCard(Integer.parseInt(yellowField.getText()));
+            match.setRedCard(Integer.parseInt(redField.getText()));
+            match.setGoalScored(Integer.parseInt(scoredField.getText()));
+            match.setGoalConceded(Integer.parseInt(concededField.getText()));
+
+            Club club = AppContext.getCurrentClub();
+            club.getMatches().add(match);  // Ajoute au modèle
+
+            // Fermer la fenêtre
+            opponentField.getScene().getWindow().hide();
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la saisie : " + e.getMessage());
+        }
+    }
 }
