@@ -152,7 +152,7 @@ public class PlayerController {
             String firstName = firstNameTextField.getText();
             String lastName = lastNameTextField.getText();
             LocalDate birthday = birthdayDatePicker.getValue();
-            Gender gender = menRadio.isSelected() ? Gender.MEN : Gender.WOMAN;
+            Gender gender = (Gender) genderGroup.getSelectedToggle().getUserData();
             int salary = Integer.parseInt(salaryTextField.getText());
             Position position = positionComboBox.getValue();
             int jerseyNumber = Integer.parseInt(jerseyNumberTextField.getText());
