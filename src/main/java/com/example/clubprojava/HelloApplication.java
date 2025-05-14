@@ -91,7 +91,8 @@ public class HelloApplication extends Application {
         }
 
         // Charger la vue FXML
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("jersey-view.fxml"));
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("nav.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 600);
         stage.setTitle("ClubPro");
         stage.setScene(scene);

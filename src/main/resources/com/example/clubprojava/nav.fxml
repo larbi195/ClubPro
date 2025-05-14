@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.clubprojava.controller.NavController">
+
+ <top>
+        <MenuBar>
+            <Menu text="Navigation">
+                <MenuItem text="Joueurs" onAction="#goToPlayer"/>
+                <MenuItem text="Membres du Club" onAction="#goToClubMembers"/>
+                <MenuItem text="Matchs" onAction="#goToMatch"/>
+            </Menu>
+        </MenuBar>
+    </top>
+    <center>
+        <fx:include fx:id="contentPane" source="player-view.fxml"/>
+    </center>
+</BorderPane>
