@@ -13,6 +13,7 @@ public class Jersey {
         this.primaryColor = primaryColor;
         this.secondaryColor = secondaryColor;
     }
+    public Jersey(){}
 
     public TypeJersey getTypeJersey() {
         return typeJersey;
