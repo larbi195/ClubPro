@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 import java.time.LocalDate;
 
-public class Staff extends Person {
+public class Staff extends Person implements Affichable{
     private ObjectProperty<Job> job;
 
 
@@ -26,6 +26,16 @@ public class Staff extends Person {
 
     public void setJob(Job job) {
         this.job.set(job);
+    }
+
+    @Override
+    public String getTexteAffichage() {
+        return String.format("Staff: %s %s | Poste: %s | Salaire: %d€",
+                getFirstname(),
+                getLastname(),
+                job,
+                getSalary()
+        );
     }
 
 }

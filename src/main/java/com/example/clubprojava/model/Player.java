@@ -8,7 +8,7 @@ import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
-public class Player extends Person {
+public class Player extends Person implements Affichable{
     private IntegerProperty jerseyNumber;
     private ObjectProperty<Position> position;
     private DoubleProperty shoeSize;
@@ -109,4 +109,20 @@ public class Player extends Person {
     public ObjectProperty<JerseySize> jerseySizeProperty() {
         return jerseySize;
     }
-}
+    @Override
+    public String getTexteAffichage() {
+        return String.format("Joueur: %s %s | N°%d | Position: %s | Taille: %.1f cm | Poids: %.1f kg | Pointure: %.1f | Pied fort: %s | Taille maillot: %s | Salaire: %d€",
+                getFirstname(),
+                getLastname(),
+                getJerseyNumber(),
+                getPosition(),
+                getHeight(),
+                getWeight(),
+                getShoeSize(),
+                getStrongFoot(),
+                getJerseySize(),
+                getSalary()
+        );
+
+
+    }}
