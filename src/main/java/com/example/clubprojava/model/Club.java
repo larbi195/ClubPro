@@ -87,6 +87,15 @@ public class Club {
         this.players = players;
     }
 
+    public void addPlayer(Player player) {
+        // Assurez-vous que la liste n'est pas nulle avant d'ajouter
+        if (players != null) {
+            this.players.add(player);
+        } else {
+            System.out.println("La liste des joueurs est null");
+        }
+    }
+
     public List<Staff> getStaffs() {
         return staffs;
     }
