@@ -25,13 +25,13 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        //AppContext.setCurrentClub(club);
         // Initialiser le DataManager
         dataManager = new DataManager();
         AppContext.setDataManager(dataManager); // Ajoute cette ligne
 
         // Essayer de charger les données
         dataManager.loadData();
+      
         // Si aucun club n'est chargé, créer un nouveau club avec les données par défaut
         if (AppContext.getCurrentClub() == null) {
             List<Player> playersList = new ArrayList<>(Arrays.asList(
@@ -51,6 +51,17 @@ public class HelloApplication extends Application {
                     new Staff("Deschamps", "Didier", LocalDate.of(1968, 10, 15),Gender.MEN, 500000, Job.COACH),
                     new Staff("Dupont", "Pierre", LocalDate.of(1975, 5, 20), Gender.MEN, 150000, Job.PHYSIOTHERAPIST)
             ));
+          
+            List<Jersey> jerseysList = new ArrayList<>(Arrays.asList(
+                    new Jersey(TypeJersey.HOME, ColorJersey.RED, ColorJersey.BLUE),
+                    new Jersey(TypeJersey.AWAY, ColorJersey.BLACK, ColorJersey.WHITE)
+            ));
+
+            List<Stadium> stadiumsList = new ArrayList<>(Arrays.asList(
+                    new Stadium("Camp Nou", 99000, "Barcelone", GrassType.NATURAL, 10500.0),
+                    new Stadium("parc", 55000, "Paris", GrassType.SYNTHETIC, 10500.0),
+                    new Stadium("it", 63000, "Milan", GrassType.HYBRID, 10500.0)
+            ));
 
             Club club = new Club(
                     "FC Mahr",
@@ -60,10 +71,21 @@ public class HelloApplication extends Application {
                     1,
                     playersList,
                     staffsList,
+                    stadiumsList,
                     new ArrayList<Match>(),
-                    new ArrayList<Jersey>(),
+                    jerseysList,
                     new Statistique(0, 0, 0, 0, 0, 0, 0, 0)
             );
+
+            Team team1 = new Team(playersList);
+
+            List<Match> Matchlist = Arrays.asList(
+                    new Match(LocalDate.now(), "BARCA", TypeMatch.AWAY, club.getJerseys().get(0), Championship.UEFA_CHAMPIONS_LEAGUE, team1, club.getStadiums().get(0), MatchResult.DEFEAT, 0,0,0,2,3),
+                    new Match(LocalDate.now(), "PSG", TypeMatch.HOME, club.getJerseys().get(0), Championship.LIGUE_1, team1, club.getStadiums().get(1), MatchResult.DEFEAT, 0,0,0,2,3),
+                    new Match(LocalDate.now(), "INTER", TypeMatch.AWAY, club.getJerseys().get(0), Championship.UEFA_EUROPA_LEAGUE, team1, club.getStadiums().get(2), MatchResult.DEFEAT, 0,0,0,2,3)
+
+            );
+            club.setMatches(Matchlist);
 
             AppContext.setCurrentClub(club);
         }
@@ -74,9 +96,6 @@ public class HelloApplication extends Application {
         stage.setTitle("ClubPro");
         stage.setScene(scene);
         stage.show();
-
-
-
 
 }
     @Override

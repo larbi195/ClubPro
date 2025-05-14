@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.clubprojava.controller.MatchController"
+      spacing="10" alignment="CENTER">
+    <padding><Insets top="20" bottom="20" left="20" right="20"/></padding>
+
+    <Label text="Ajouter un Match" style="-fx-font-size: 18px;"/>
+
+    <TextField fx:id="opponentField" promptText="Adversaire"/>
+    <DatePicker fx:id="datePicker"/>
+    <TextField fx:id="stadiumField" promptText="Nom du stade"/>
+    <TextField fx:id="capacityField" promptText="Capacité du stade"/>
+    <ComboBox fx:id="resultCombo" promptText="Résultat"/>
+    <TextField fx:id="yellowField" promptText="Cartons Jaunes"/>
+    <TextField fx:id="redField" promptText="Cartons Rouges"/>
+    <TextField fx:id="scoredField" promptText="Buts Marqués"/>
+    <TextField fx:id="concededField" promptText="Buts Concédés"/>
+
+    <Button text="Enregistrer" onAction="#handleSave"/>
+</VBox>

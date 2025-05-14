@@ -20,7 +20,7 @@ public class Club {
 
 
 
-    public Club(String name, String city, double budget, String league, Integer ranking, List<Player> players, List<Staff> staffs, List<Match> matches, List<Jersey> jerseys, Statistique statistique) {
+    public Club(String name, String city, double budget, String league, Integer ranking, List<Player> players, List<Staff> staffs, List<Stadium> stadiums, List<Match> matches, List<Jersey> jerseys, Statistique statistique) {
         this.name = name;
         this.city = city;
         this.budget = budget;
@@ -28,6 +28,7 @@ public class Club {
         this.ranking = ranking;
         this.players = players;
         this.staffs = staffs;
+        this.stadiums = stadiums;
         this.matches = matches;
         this.jerseys = jerseys;
         this.statistique = statistique;
@@ -81,6 +82,7 @@ public class Club {
     public void setRanking(Integer ranking) {
         this.ranking = ranking;
     }
+
     public List<Stadium> getStadiums() {
         return stadiums;
     }
@@ -129,6 +131,8 @@ public class Club {
     public void setMatches(List<Match> matches) {
         this.matches = matches;
     }
+
+    public void addMatch(Match match) {this.matches.add(match);}
 
     public Statistique getStatistique() {
         return statistique;
