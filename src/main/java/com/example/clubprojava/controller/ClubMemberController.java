@@ -56,7 +56,7 @@ public class ClubMemberController implements Initializable {
         // Colonnes pour toutes les données
         TableColumn<Affichable, String> typeColumn = new TableColumn<>("Type");
         typeColumn.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue() instanceof Player ? "Joueur" : "Staff")
+                new SimpleStringProperty(data.getValue() instanceof Player ? "Player" : "Staff")
         );
 
         TableColumn<Affichable, String> prenomColumn = new TableColumn<>("Prénom");

@@ -20,6 +20,7 @@ public class Staff extends Person implements Affichable {
     public void setJob(Job job) {
         this.job = job;
     }
+
     @Override
     public String getTexteAffichage() {
         return String.format("Staff: %s %s | Poste: %s | Salaire: %d€",

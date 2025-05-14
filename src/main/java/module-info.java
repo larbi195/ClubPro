@@ -6,6 +6,8 @@ module com.example.clubprojava {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.compiler;
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.datatype.jsr310;
 
     opens com.example.clubprojava to javafx.fxml;
     exports com.example.clubprojava;

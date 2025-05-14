@@ -15,8 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HelloApplication extends Application {
+    private DataManager dataManager;
+
     @Override
     public void start(Stage stage) throws IOException {
+
+
         // Créer des données de test
         List<Player> players = new ArrayList<>();
         players.add(new Player("Mbappé", "Kylian", LocalDate.of(1998, 12, 20),
@@ -36,6 +40,8 @@ public class HelloApplication extends Application {
         Club club = new Club("FC Test", "Paris", 100000000.0, "Ligue 1", 1,
                 players, staffs, new ArrayList<>(), new ArrayList<>(), new Statistique(0, 0, 0, 0, 0, 0, 0, 0));
 
+        dataManager = new DataManager(club);
+
         // Charger la vue (modification de cette partie)
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("memberlist.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
@@ -47,7 +53,17 @@ public class HelloApplication extends Application {
         stage.setTitle("Membres du Club");
         stage.setScene(scene);
         stage.show();
+
+
     }
+    @Override
+    public void stop() {
+        // Sauvegarde explicite lors de la fermeture de l'application
+        if (dataManager != null) {
+            dataManager.saveData();
+        }
+    }
+
 
     public static void main(String[] args) {
         launch();
