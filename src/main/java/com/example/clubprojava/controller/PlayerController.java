@@ -70,6 +70,26 @@ public class PlayerController {
     private TextField salaryTextField;
     @FXML
     private ComboBox<Position> positionComboBox;
+    @FXML
+    private TextField jerseyNumberTextField;
+    private ToggleGroup jerseySizeGroup;
+    @FXML
+    private RadioButton sizeSRadio;
+    @FXML
+    private RadioButton sizeMRadio;
+    @FXML
+    private RadioButton sizeLRadio;
+    @FXML
+    private RadioButton sizeXLRadio;
+    @FXML
+    private TextField shoeSizeTextField;
+    @FXML
+    private TextField weightTextField;
+    @FXML
+    private TextField heightTextField;
+    @FXML
+    private ComboBox<StrongFoot> strongFootComboBox;
+
 
     @FXML
     private Label outputLabel;
@@ -97,27 +117,57 @@ public class PlayerController {
         // Exemple de données
         playersList = FXCollections.observableArrayList(club.getPlayers());
 
-        System.out.println(club.getPlayers());
-
+        // Attribuer la listes des joueurs dans le tableau
         playerTable.setItems(playersList);
 
+        // Attribuer les choix de poste dans le formulaire
         positionComboBox.getItems().addAll(Position.values());
 
+        // Attribuer les boutons radio pour le genre dans le formulaire
         genderGroup = new ToggleGroup();
         menRadio.setToggleGroup(genderGroup);
         womenRadio.setToggleGroup(genderGroup);
-
         menRadio.setUserData(Gender.MEN);
         womenRadio.setUserData(Gender.WOMAN);
+
+        // Attribuer les boutons radio pour la taille du maillot dans le formulaire
+        jerseySizeGroup = new ToggleGroup();
+        sizeSRadio.setToggleGroup(jerseySizeGroup);
+        sizeMRadio.setToggleGroup(jerseySizeGroup);
+        sizeLRadio.setToggleGroup(jerseySizeGroup);
+        sizeXLRadio.setToggleGroup(jerseySizeGroup);
+        sizeSRadio.setUserData(JerseySize.S);
+        sizeMRadio.setUserData(JerseySize.M);
+        sizeLRadio.setUserData(JerseySize.L);
+        sizeXLRadio.setUserData(JerseySize.XL);
+
+        // Attribuer les choix de poste dans le formulaire
+        strongFootComboBox.getItems().addAll(StrongFoot.values());
     }
 
     @FXML
     private void handleSubmit() {
         int salary = 0;
+        int jerseyNumber = 0;
+        double shoeSize = 0.0;
+        double weight = 0.0;
+        double height = 0.0;
+
         try {
-            salary = Integer.parseInt(salaryTextField.getText());
+            salary = Integer.parseInt(salaryTextField.getText().trim());
+            jerseyNumber = Integer.parseInt(jerseyNumberTextField.getText().trim());
+
+            // Remplacer la virgule par un point avant de parser
+            String shoeSizeInput = shoeSizeTextField.getText().trim().replace(',', '.');
+            String weightInput = weightTextField.getText().trim().replace(',', '.');
+            String heightInput = heightTextField.getText().trim().replace(',', '.');
+
+            shoeSize = Double.parseDouble(shoeSizeInput);
+            weight = Double.parseDouble(weightInput);
+            height = Double.parseDouble(heightInput);
+
         } catch (NumberFormatException e) {
-            outputLabel.setText("Veuillez entrer un salaire valide.");
+            outputLabel.setText("Veuillez entrer des valeurs numériques valides (ex: 1.75 ou 1,75).");
             return;
         }
         Player newPlayer = new Player(
@@ -126,21 +176,21 @@ public class PlayerController {
             birthdayDatePicker.getValue(),
             (Gender) genderGroup.getSelectedToggle().getUserData(),
             salary,
-            10,
+            jerseyNumber,
             positionComboBox.getValue(),
-            45,
-            65,
-            1.93,
-            StrongFoot.RIGHT,
-            JerseySize.L
+            shoeSize,
+            weight,
+            height,
+            strongFootComboBox.getValue(),
+            (JerseySize) jerseySizeGroup.getSelectedToggle().getUserData()
         );
 
         club.addPlayer(newPlayer);
         playersList.add(newPlayer);
 
         // Vider les champs
-        firstNameTextField.setText("");
-        lastNameTextField.setText("");
+        //firstNameTextField.setText("");
+        //lastNameTextField.setText("");
     }
 
 }
