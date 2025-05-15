@@ -17,12 +17,12 @@ public class Staff extends Person implements Affichable {
     @JsonIgnore
     private ObjectProperty<Job> job = new SimpleObjectProperty<>();
 
-    // ✅ Constructeur vide requis pour Jackson
+
     public Staff() {
         super();
     }
 
-    // ✅ Constructeur complet pour la désérialisation
+
     @JsonCreator
     public Staff(
             @JsonProperty("lastname") String lastname,
@@ -36,7 +36,7 @@ public class Staff extends Person implements Affichable {
         this.job.set(job);
     }
 
-    // ✅ Méthodes pour sérialisation/désérialisation Jackson
+
     @JsonProperty("job")
     public Job getJob() {
         return job.get();
@@ -47,7 +47,7 @@ public class Staff extends Person implements Affichable {
         this.job.set(job);
     }
 
-    // ✅ JavaFX property (ignorée pour Jackson)
+
     @JsonIgnore
     public ObjectProperty<Job> jobProperty() {
         return job;

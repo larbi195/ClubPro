@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <ScrollPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.clubprojava.controller.StatistiqueController"
@@ -15,7 +12,6 @@
             <Label fx:id="outputLabel"/>
 
             <GridPane hgap="15" vgap="10">
-                <!-- Ligne 1 : Noms des colonnes -->
                 <Label text="Matchs Gagnés" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
                 <Label text="Matchs Perdus" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
                 <Label text="Matchs Joués" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
@@ -25,7 +21,6 @@
                 <Label text="Buts Marqués" GridPane.rowIndex="0" GridPane.columnIndex="6"/>
                 <Label text="Buts Encaissés" GridPane.rowIndex="0" GridPane.columnIndex="7"/>
 
-                <!-- Ligne 2 : Valeurs dynamiques -->
                 <Label fx:id="matchesWonLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                 <Label fx:id="matchesLostLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
                 <Label fx:id="matchesPlayedLabel" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
@@ -35,6 +30,8 @@
                 <Label fx:id="goalsScoredLabel" GridPane.rowIndex="1" GridPane.columnIndex="6"/>
                 <Label fx:id="goalsConcededLabel" GridPane.rowIndex="1" GridPane.columnIndex="7"/>
             </GridPane>
+
+            <Button fx:id="refreshButton" text="Rafraîchir" onAction="#handleRefresh"/>
         </VBox>
     </content>
 </ScrollPane>

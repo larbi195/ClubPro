@@ -1,14 +1,21 @@
 package com.example.clubprojava.controller;
 
-import com.example.clubprojava.model.*;
+import com.example.clubprojava.model.AppContext;
+import com.example.clubprojava.model.Club;
+import com.example.clubprojava.model.Match;
+import com.example.clubprojava.model.Statistique;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
+import java.util.List;
 
 public class StatistiqueController {
+
     @FXML
-    public Label clubName;
+    private Label clubName;
     @FXML
-    public Label outputLabel;
+    private Label outputLabel;
     @FXML
     private Label matchesWonLabel;
     @FXML
@@ -26,13 +33,23 @@ public class StatistiqueController {
     @FXML
     private Label goalsConcededLabel;
 
+    @FXML
+    private Button refreshButton;
+
+    private Club club;
     private Statistique statistique;
 
     @FXML
     public void initialize() {
-        Club club = AppContext.getCurrentClub();
+        club = AppContext.getCurrentClub();
         clubName.setText(club.getName());
-        statistique = new Statistique(12, 4, 20, 4, 7, 2, 40, 18);
+        loadStatistiques();
+    }
+
+    @FXML
+    private void loadStatistiques() {
+        List<Match> matches = club.getMatches();
+        statistique = new Statistique(matches);
         updateView();
     }
 
@@ -46,9 +63,10 @@ public class StatistiqueController {
         goalsScoredLabel.setText(statistique.getGoalsScored().toString());
         goalsConcededLabel.setText(statistique.getGoalsConceded().toString());
     }
+
+    @FXML
+    private void handleRefresh() {
+        loadStatistiques();
+        outputLabel.setText("Statistiques mises à jour.");
+    }
 }
-
-
-
-
-
