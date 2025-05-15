@@ -3,21 +3,45 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.clubprojava.controller.MatchController"
-      spacing="10" alignment="CENTER">
-    <padding><Insets top="20" bottom="20" left="20" right="20"/></padding>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.clubprojava.controller.MatchController"
+            fitToWidth="true">
+    <content>
+        <VBox spacing="10" alignment="CENTER">
+            <padding><Insets top="20" bottom="20" left="20" right="20"/></padding>
 
-    <Label text="Ajouter un Match" style="-fx-font-size: 18px;"/>
+            <Label text="Ajout de match"/>
+            <Label fx:id="clubName"/>
+            <Label fx:id="outputLabel"/>
 
-    <TextField fx:id="opponentField" promptText="Adversaire"/>
-    <DatePicker fx:id="datePicker"/>
-    <TextField fx:id="stadiumField" promptText="Nom du stade"/>
-    <TextField fx:id="capacityField" promptText="Capacité du stade"/>
-    <ComboBox fx:id="resultCombo" promptText="Résultat"/>
-    <TextField fx:id="yellowField" promptText="Cartons Jaunes"/>
-    <TextField fx:id="redField" promptText="Cartons Rouges"/>
-    <TextField fx:id="scoredField" promptText="Buts Marqués"/>
-    <TextField fx:id="concededField" promptText="Buts Concédés"/>
+            <TextField fx:id="opponentField" promptText="Adversaire"/>
+            <DatePicker fx:id="datePicker"/>
+            <TextField fx:id="stadiumField" promptText="Nom du stade"/>
+            <TextField fx:id="capacityField" promptText="Capacité du stade"/>
+            <ComboBox fx:id="resultCombo" promptText="Résultat"/>
+            <TextField fx:id="yellowField" promptText="Cartons Jaunes"/>
+            <TextField fx:id="redField" promptText="Cartons Rouges"/>
+            <TextField fx:id="scoredField" promptText="Buts Marqués"/>
+            <TextField fx:id="concededField" promptText="Buts Concédés"/>
 
-    <Button text="Enregistrer" onAction="#handleSave"/>
-</VBox>
+            <Button text="Enregistrer" onAction="#handleSave"/>
+
+            <TableView fx:id="matchTable" prefHeight="400.0" prefWidth="600.0">
+                <columns>
+                    <TableColumn fx:id="dateColum" text="date" prefWidth="100.0"/>
+                    <TableColumn fx:id="opponentColum" text="adversaire" prefWidth="100.0"/>
+                    <TableColumn fx:id="typeMatchColum" text="type de matche" prefWidth="100.0"/>
+                    <TableColumn fx:id="jerseyColum" text="maillot" prefWidth="100.0"/>
+                    <TableColumn fx:id="championshipColum" text="championat" prefWidth="100.0"/>
+                    <TableColumn fx:id="stadiumColum" text="stade" prefWidth="100.0"/>
+                    <TableColumn fx:id="matchResultColum" text="resultat" prefWidth="100.0"/>
+                    <TableColumn fx:id="yellowCardColum" text="carton jaune" prefWidth="100.0"/>
+                    <TableColumn fx:id="redCardColum" text="carton rouge" prefWidth="100.0"/>
+                    <TableColumn fx:id="goalScoredColum" text="but marqués" prefWidth="100.0"/>
+                    <TableColumn fx:id="goalConcededColum" text="but encaissés" prefWidth="100.0"/>
+                </columns>
+            </TableView>
+            <Button text="Supprimer" onAction="#handleDelete"/>
+        </VBox>
+    </content>
+</ScrollPane>
