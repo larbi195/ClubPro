@@ -92,11 +92,13 @@ public class HelloApplication extends Application {
 
         // Charger la vue FXML
 
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("nav.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 600);
         stage.setTitle("ClubPro");
         stage.setScene(scene);
         stage.show();
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
 }
     @Override
