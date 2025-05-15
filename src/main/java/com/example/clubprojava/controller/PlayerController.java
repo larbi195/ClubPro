@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 
 import java.util.stream.Collectors;
 
@@ -90,6 +91,10 @@ public class PlayerController {
     private TextField heightTextField;
     @FXML
     private ComboBox<StrongFoot> strongFootComboBox;
+    @FXML private VBox advancedFiltersBox;
+    @FXML private TextField filterFirstNameField;
+    @FXML private ComboBox<Position> filterPositionComboBox;
+    @FXML private ComboBox<Gender> filterGenderComboBox;
 
 
     @FXML
@@ -144,7 +149,36 @@ public class PlayerController {
 
         // Attribuer les choix de poste dans le formulaire
         strongFootComboBox.getItems().addAll(StrongFoot.values());
+
+        // Attribuer les choixs pour les filtres
+        filterGenderComboBox.getItems().addAll(Gender.values());
+        filterPositionComboBox.getItems().addAll(Position.values());
+
+        // Appliquer les filtres au tableau à chaque changement
+        filterFirstNameField.textProperty().addListener((obs, oldV, newV) -> applyFilters());
+        filterPositionComboBox.setOnAction(e -> applyFilters());
+        filterGenderComboBox.setOnAction(e -> applyFilters());
+        }
+
+    private void applyFilters() {
+        List<Player> filtered = club.getPlayers().stream()
+                .filter(player -> {
+                    String filterFirstName = filterFirstNameField.getText();
+                    return filterFirstName == null || filterFirstName.isEmpty() || player.getFirstname().toLowerCase().contains(filterFirstName.toLowerCase());
+                })
+                .filter(player -> {
+                    Position selectedPosition = filterPositionComboBox.getValue();
+                    return selectedPosition == null || player.getPosition() == selectedPosition;
+                })
+                .filter(player -> {
+                    Gender selectedGender = filterGenderComboBox.getValue();
+                    return selectedGender == null || player.getGender() == selectedGender;
+                })
+                .collect(Collectors.toList());
+
+        playersList.setAll(filtered);
     }
+
 
     @FXML
     private void handleSubmit() {
@@ -185,5 +219,28 @@ public class PlayerController {
         }
     }
 
+    @FXML
+    private void handleDelete() {
+        Player selectedPlayer = playerTable.getSelectionModel().getSelectedItem();
+        if (selectedPlayer != null) {
+            // Supprimer le joueur du club et de la liste observable
+            club.getPlayers().remove(selectedPlayer);
+            playersList.remove(selectedPlayer);
+
+            // Sauvegarde des données
+            AppContext.getDataManager().saveData();
+
+            outputLabel.setText("Joueur supprimé avec succès !");
+        } else {
+            outputLabel.setText("Veuillez sélectionner un joueur à supprimer.");
+        }
+    }
+
+    @FXML
+    private void toggleAdvancedFilters() {
+        boolean isVisible = advancedFiltersBox.isVisible();
+        advancedFiltersBox.setVisible(!isVisible);
+        advancedFiltersBox.setManaged(!isVisible); // important pour qu’il disparaisse complètement
+    }
 
 }

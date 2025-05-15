@@ -3,8 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TextField?>
@@ -58,6 +58,17 @@
                 <Button text="Ajouter" onAction="#handleSubmit"/>
             </VBox>
 
+            <HBox spacing="10">
+                <Button text="Filtres avancés" onAction="#toggleAdvancedFilters"/>
+            </HBox>
+
+            <VBox fx:id="advancedFiltersBox" visible="false" managed="false" spacing="10">
+                <TextField fx:id="filterFirstNameField" promptText="Prénom"/>
+                <ComboBox fx:id="filterPositionComboBox" promptText="Poste"/>
+                <ComboBox fx:id="filterGenderComboBox" promptText="Genre"/>
+                <ComboBox fx:id="filterStrongFootComboBox" promptText="Pied fort"/>
+            </VBox>
+
             <TableView fx:id="playerTable" prefHeight="400.0" prefWidth="600.0">
                 <columns>
                     <TableColumn fx:id="firstNameColumn" text="Prénom" prefWidth="100.0"/>
@@ -74,6 +85,9 @@
                     <TableColumn fx:id="strongFootColumn" text="Pied fort" prefWidth="100.0"/>
                 </columns>
             </TableView>
+
+            <Button text="Supprimer" onAction="#handleDelete"/>
+
         </VBox>
     </content>
 </ScrollPane>
