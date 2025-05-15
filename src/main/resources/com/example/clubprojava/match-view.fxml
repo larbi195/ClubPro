@@ -14,8 +14,11 @@
             <Label fx:id="clubName"/>
             <Label fx:id="outputLabel"/>
 
-            <TextField fx:id="opponentField" promptText="Adversaire"/>
             <DatePicker fx:id="datePicker"/>
+            <TextField fx:id="opponentField" promptText="Adversaire"/>
+            <ComboBox fx:id="typeDeMatchCombo" promptText="Type de match"/>
+            <ComboBox fx:id="jerseyCombo" promptText="Maillot"/>
+            <ComboBox fx:id="championshipCombo" promptText="Championat"/>
             <TextField fx:id="stadiumField" promptText="Nom du stade"/>
             <TextField fx:id="capacityField" promptText="Capacité du stade"/>
             <ComboBox fx:id="resultCombo" promptText="Résultat"/>
@@ -34,6 +37,7 @@
                     <TableColumn fx:id="jerseyColum" text="maillot" prefWidth="100.0"/>
                     <TableColumn fx:id="championshipColum" text="championat" prefWidth="100.0"/>
                     <TableColumn fx:id="stadiumColum" text="stade" prefWidth="100.0"/>
+                    <TableColumn fx:id="CapacityColum" text="capacité du stade" prefWidth="100.0"/>
                     <TableColumn fx:id="matchResultColum" text="resultat" prefWidth="100.0"/>
                     <TableColumn fx:id="yellowCardColum" text="carton jaune" prefWidth="100.0"/>
                     <TableColumn fx:id="redCardColum" text="carton rouge" prefWidth="100.0"/>
