@@ -1,7 +1,10 @@
 package com.example.clubprojava.model;
 
+import com.example.clubprojava.model.Enum.MatchResult;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class Statistique {
 
@@ -14,11 +17,10 @@ public class Statistique {
     private Integer goalsScored;
     private Integer goalsConceded;
 
-    // ✅ Constructeur vide pour Jackson
-    public Statistique() {
-    }
+    // Constructeur vide
+    public Statistique() {}
 
-    // ✅ Constructeur complet avec @JsonCreator (optionnel mais propre)
+    // Constructeur principal avec tous les champs
     @JsonCreator
     public Statistique(
             @JsonProperty("matchesWon") Integer matchesWon,
@@ -33,14 +35,45 @@ public class Statistique {
         this.matchesWon = matchesWon;
         this.matchesLost = matchesLost;
         this.matchesPlayed = matchesPlayed;
-        this.yellowCards = yellowCards;
         this.matchesNull = matchesNull;
+        this.yellowCards = yellowCards;
         this.redCards = redCards;
         this.goalsScored = goalsScored;
         this.goalsConceded = goalsConceded;
     }
 
-    // Getters & Setters...
+
+    public Statistique(List<Match> matches) {
+        this.matchesPlayed = matches.size();
+        this.matchesWon = 0;
+        this.matchesLost = 0;
+        this.matchesNull = 0;
+        this.yellowCards = 0;
+        this.redCards = 0;
+        this.goalsScored = 0;
+        this.goalsConceded = 0;
+
+        for (Match match : matches) {
+
+            MatchResult matchResult = match.getMatchResult();
+            if (matchResult == null ) continue;
+
+            if (matchResult == MatchResult.VICTORY){
+                matchesWon++;
+            } else if (matchResult == MatchResult.DEFEAT) {
+                matchesLost++;
+            } else {
+                matchesNull++;
+            }
+
+            goalsScored += match.getGoalScored();
+            goalsConceded += match.getGoalConceded();
+            yellowCards += match.getYellowCard() != null ? match.getYellowCard() : 0;
+            redCards += match.getRedCard() != null ? match.getRedCard() : 0;
+        }
+    }
+
+    // Getters & Setters
 
     public Integer getMatchesWon() {
         return matchesWon;

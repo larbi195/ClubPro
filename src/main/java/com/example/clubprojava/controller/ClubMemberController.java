@@ -44,7 +44,6 @@ public class ClubMemberController implements Initializable {
         this.club = AppContext.getCurrentClub();
         membersList = FXCollections.observableArrayList();
 
-        // Colonne cachée pour respecter la story
         TableColumn<Affichable, String> texteAffichageColumn = new TableColumn<>("Texte d'affichage");
         texteAffichageColumn.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().getTexteAffichage())
