@@ -1,0 +1,80 @@
+/* Base */
+.root {
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f5f7fa;  /* Gris très clair */
+    -fx-text-fill: #2e3a59;         /* Bleu-gris foncé */
+}
+
+/* Labels */
+.label {
+    -fx-text-fill: #3a5068;         /* Bleu-gris un peu plus foncé */
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.07), 1,0,0,1);
+}
+
+/* Boutons */
+.button {
+    -fx-background-color: #627d98; /* Bleu-gris doux */
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+    -fx-padding: 10px 24px;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( gaussian , rgba(98,125,152,0.4), 6,0,0,2);
+    -fx-transition: all 0.25s ease-in-out;
+}
+
+.button:hover {
+    -fx-background-color: #486581; /* Bleu-gris plus sombre */
+    -fx-effect: dropshadow( gaussian , rgba(72,101,129,0.6), 8,0,0,3);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #a9b4c2;
+    -fx-border-radius: 6px;
+    -fx-text-fill: #2e3a59;
+    -fx-padding: 4px 10px;
+}
+
+/* RadioButton */
+.radio-button {
+    -fx-text-fill: #486581;
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #d9e2ec;
+    -fx-table-cell-border-color: #d9e2ec;
+    -fx-text-fill: #2e3a59;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #627d98;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #e1e6f0;
+}
+
+/* ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+/* VBox */
+.vbox {
+    -fx-background-color: transparent;
+}

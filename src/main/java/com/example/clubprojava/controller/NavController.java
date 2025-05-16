@@ -29,9 +29,10 @@ public class NavController {
     }
 
     @FXML
-    public void goToJersey() {
-        loadContent("jersey-view.fxml");
-    }
+    public void goToJersey() {loadContent("jersey-view.fxml");}
+
+    @FXML
+    public void goToStatistique() {loadContent("statistique-view.fxml");}
 
 
     private void loadContent(String fxmlFile) {

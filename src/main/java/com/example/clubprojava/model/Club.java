@@ -132,7 +132,13 @@ public class Club {
         this.matches = matches;
     }
 
-    public void addMatch(Match match) {this.matches.add(match);}
+    public void addMatch(Match match) {
+        if (matches == null) {
+            matches = new ArrayList<>();
+        }
+        this.matches.add(match);
+    }
+
 
     public Statistique getStatistique() {
         return statistique;
